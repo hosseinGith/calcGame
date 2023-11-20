@@ -1,0 +1,244 @@
+@font-face {
+  font-family: vazir;
+  src: url("../assets/fonts/Vazir.ttf");
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -moz-user-select: none;
+  font-family: vazir;
+  border: 0;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("../assets/images/nightWallpaper.jpeg") no-repeat center;
+  background-size: cover;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  > div {
+    padding: 10px;
+  }
+  .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .levels {
+      padding: 2px 5px;
+      border: 3px solid;
+      font-size: 20px;
+      font-weight: 1000;
+    }
+    .menu {
+      .menuBtn {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 5px 3px;
+        background-color: transparent;
+        position: relative;
+        z-index: 3;
+        transition: all 0.3s;
+        cursor: pointer;
+        span {
+          display: inline-block;
+          width: 100%;
+          height: 3px;
+          background-color: rgb(255, 255, 255);
+          z-index: 3;
+          transition: all 0.3s;
+        }
+      }
+      .gameOptions {
+        width: 0;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-color: #313131de;
+        z-index: 2;
+        transition: all 0.3s;
+        overflow: hidden;
+        align-items: center;
+        text-align: center;
+        ul {
+          opacity: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 50px;
+          font-size: 20px;
+          li {
+            > div {
+              display: flex;
+              flex-direction: column;
+              span {
+                a {
+                  color: #849afffd;
+                }
+                .telegramId {
+                  background-color: transparent;
+                  color: inherit;
+                  font-size: 20px;
+                }
+                .copyInClipeBoard {
+                  transition: all 0.3s;
+                  color: #a89797;
+                  overflow: hidden;
+                  position: absolute;
+                  left: 50%;
+                  transform: translate(-50%);
+                  opacity: 0;
+                }
+              }
+              span.active {
+                .copyInClipeBoard {
+                  opacity: 1;
+                }
+              }
+            }
+          }
+          .changGameOptions {
+            button {
+              font-size: 18px;
+              border-radius: 20px;
+              padding: 5px 10px;
+              cursor: pointer;
+            }
+            button:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+    .menu.active {
+      .span-1 {
+        position: absolute;
+        top: 80%;
+        left: -12px;
+        transform: rotate(135deg) translate(-50%, -50%);
+      }
+      .span-2 {
+        display: none;
+      }
+      .span-3 {
+        position: absolute;
+        top: 2px;
+        left: -10px;
+        transform: rotate(-135deg) translate(-50%, -50%);
+      }
+      .gameOptions {
+        display: grid;
+        width: 100%;
+        ul {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .main {
+    width: 100%;
+    position: absolute;
+    top: 30%;
+    text-align: center;
+    font-size: 60px;
+    transform: translate(0, -50%);
+  }
+  .footer {
+    width: 100%;
+    bottom: 80px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    > div {
+      cursor: default;
+    }
+    .numberButtons {
+      button:not(.btnNum, .active) {
+        width: 0;
+        height: 30px;
+        padding: 0px;
+        overflow: hidden;
+        background-color: #ffffff80;
+      }
+      .hideBtn.active {
+        width: max-content;
+      }
+      .btnNum.active {
+        background-color: #ffffff80;
+      }
+    }
+    .numberButtons.showBtnsOparator {
+      .hideBtn {
+        display: inline-block;
+        width: 25px;
+      }
+      + .oprators .active {
+        color: #ffff00;
+      }
+    }
+    > div button {
+      transition: all 0.3s;
+      padding: 5px;
+      background-color: transparent;
+      cursor: pointer;
+      color: #fff;
+      font-size: 30px;
+    }
+    .resetNumbers {
+      padding: 3px;
+      font-size: 15px;
+      right: 10px;
+      position: absolute;
+    }
+    .oprators {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+  .restBtn {
+    position: absolute;
+    bottom: 110px;
+    right: 0;
+    .resetNumbers {
+      padding: 10px;
+      font-size: 20px;
+      background: transparent;
+      color: inherit;
+      border-radius: 50%;
+    }
+    .resetNumbers:hover {
+      background-color: #bebcbc41;
+    }
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .container {
+    width: 100%;
+    height: 800px;
+    max-width: 400px;
+    max-height: 600px;
+    border: 1px solid;
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+  }
+}

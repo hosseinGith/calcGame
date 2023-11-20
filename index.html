@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,19 +11,57 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="icon" href="assets/images/icon.png" />
     <title>بازی جمع</title>
   </head>
 
   <body>
     <div class="container">
       <div class="header">
-        <div class="menu">
-          <button class="fa fa-haberger">=</button>
+        <div class="menu active">
+          <button class="menuBtn">
+            <span class="span-1"></span>
+            <span class="span-2"></span>
+            <span class="span-3"></span>
+          </button>
+          <nav class="gameOptions">
+            <ul>
+              <li>
+                <p>4 = 10</p>
+                <p>ما به شما 4 عدد میدیم ,باید مساوی 10 شوند</p>
+              </li>
+              <li class="changGameOptions">
+                <button class="levelChange">تغییر مرحله</button>
+                <button class="nextBGImage">تغییر پس زمینه</button>
+              </li>
+              <li>
+                <div class="aboutMe">
+                  <span>
+                    ایمیل:
+                    <a href="mailto:hosseinderees7@gmail.com">
+                      hosseinderees7@gmail.com
+                    </a>
+                  </span>
+                  <span>
+                    شماره تلفن:
+                    <a href="tel:+989212978638">+989212978638</a>
+                  </span>
+                  <span>
+                    ادی تلگرام:
+                    <button class="telegramId">lovejavas_0101011@</button>
+                    <div class="copyInClipeBoard">
+                      <span>در کلیپ بورد کپی شد</span>
+                    </div>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </div>
         <div class="levels">
-          <span class="userLevel"></span>
-          <span>/</span>
           <span class="gameMaxLevel"></span>
+          <span>/</span>
+          <span class="userLevel"></span>
         </div>
       </div>
       <div class="main">
@@ -50,7 +88,7 @@
         </div>
       </div>
       <div class="restBtn">
-        <button class="resetNumbers">Reset</button>
+        <button class="resetNumbers fa fa-refresh"></button>
       </div>
     </div>
     <script src="scripts/main.js"></script>

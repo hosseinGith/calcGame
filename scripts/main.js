@@ -1,133 +1,43 @@
-function main() {
+async function main() {
   const container = document.querySelector(".container "),
+    menuBtn = document.querySelector(".menuBtn"),
     calcolatorTextShow = document.querySelector(".calcolatorTextShow"),
     oprators = document.querySelectorAll(".oprators button"),
     numberButtonsContainer = document.querySelector(".numberButtons"),
     numberButtons = document.querySelectorAll(".numberButtons button"),
     btnNum = document.querySelectorAll(".btnNum"),
     userLevel = document.querySelector(".userLevel"),
-    gameMaxLevel = document.querySelector(".gameMaxLevel");
+    gameMaxLevel = document.querySelector(".gameMaxLevel"),
+    resetNumbers = document.querySelector(".resetNumbers"),
+    telegramId = document.querySelector(".telegramId"),
+    nextBGImage = document.querySelector(".nextBGImage");
 
   let numberCalcolate = [...numberButtonsContainer.innerText],
     oldBtn,
     indexNumber = [1, 2],
     allNumber = [0, 0, 0, 0],
-    levels = [
-      "1234",
-      "2503",
-      "1171",
-      "7131",
-      "1239",
-      "1956",
-      "3185",
-      "6917",
-      "0641",
-      "1549",
-      "1218",
-      "1325",
-      "1789",
-      "6307",
-      "4128",
-      "6531",
-      "4037",
-      "4508",
-      "4121",
-      "7122",
-      "2149",
-      "6511",
-      "9715",
-      "3237",
-      "3429",
-      "8756",
-      "0145",
-      "2026",
-      "1292",
-      "1472",
-      "3134",
-      "8361",
-      "8423",
-      "6284",
-      "8364",
-      "5673",
-      "9358",
-      "6637",
-      "9863",
-      "4578",
-      "0224",
-      "5807",
-      "1263",
-      "1442",
-      "4691",
-      "3245",
-      "4927",
-      "6725",
-      "2967",
-      "3333",
-      "2998",
-      "6434",
-      "5350",
-      "4735",
-      "5375",
-      "9496",
-      "9650",
-      "1735",
-      "9616",
-      "3625",
-      "2445",
-      "5552",
-      "6582",
-      "8925",
-      "4437",
-      "8934",
-      "6646",
-      "0604",
-      "7140",
-      "5015",
-      "0342",
-      "7114",
-      "9208",
-      "1361",
-      "8205",
-      "1846",
-      "9706",
-      "7791",
-      "3283",
-      "5406",
-      "2344",
-      "3564",
-      "5683",
-      "7546",
-      "6013",
-      "5212",
-      "6409",
-      "3182",
-      "5261",
-      "7216",
-      "3913",
-      "5351",
-      "9881",
-      "1999",
-      "5582",
-      "5692",
-      "7257",
-      "5843",
-      "4949",
-      "1813",
-      "4914",
-      "3462",
-      "7102",
-    ],
+    levels = await (await fetch("./scripts/levels.json")).json(),
     nowLevel =
       localStorage.getItem("nowLevel") === null
         ? 0
         : localStorage.getItem("nowLevel"),
     isComplate = false,
     touchPCS = 0,
-    isWin = false;
+    isWin = false,
+    timeOut,
+    backgIndex = 0,
+    backgroundImages = [
+      "./assets/images/nightWallpaper.jpeg",
+      "./assets/images/nightWallpaper3.jpg",
+    ];
+
   localStorage.getItem("nowLevel") === null
     ? localStorage.setItem("nowLevel", nowLevel)
     : localStorage.getItem("nowLevel");
   gameMaxLevel.textContent = levels.length;
+  if (nowLevel > Number(gameMaxLevel.textContent - 1)) {
+    nowLevel = gameMaxLevel.textContent - 1;
+  }
   function clearChar() {
     if (!isComplate) return (calcolatorTextShow.textContent = "?");
     numberCalcolate = [...numberButtonsContainer.innerText];
@@ -243,7 +153,13 @@ function main() {
       });
     });
   });
+  menuBtn.addEventListener("click", () => {
+    menuBtn.parentElement.classList.toggle("active");
+  });
   window.addEventListener("click", (e) => {
+    if (e.target === document.body) {
+      menuBtn.parentElement.classList.remove("active");
+    }
     [...container.children].forEach((element) => {
       if (
         e.target === element ||
@@ -253,6 +169,36 @@ function main() {
       )
         numberButtonsContainer.classList.remove("showBtnsOparator");
     });
+  });
+  resetNumbers.addEventListener("click", () => {
+    numberButtons.forEach((btn) => {
+      if (btn.classList.contains("hideBtn")) {
+        btn.className = "hideBtn";
+        btn.textContent = "";
+      }
+    });
+    btnNum.forEach((btn, index) => {
+      if (btn.classList.contains("btnNum")) {
+        btn.className = "btnNum";
+        btn.textContent = levels[nowLevel][index];
+      }
+    });
+    numberButtonsContainer.className = "numberButtons";
+    calcolatorTextShow.textContent = "?";
+  });
+  nextBGImage.addEventListener("click", () => {
+    backgIndex++;
+    if (backgIndex > backgroundImages.length - 1) backgIndex = 0;
+    document.body.style.backgroundImage = `url(${backgroundImages[backgIndex]})`;
+  });
+
+  telegramId.addEventListener("click", async () => {
+    clearTimeout(timeOut);
+    navigator.clipboard.writeText(telegramId.textContent);
+    telegramId.parentElement.classList.add("active");
+    timeOut = setInterval(() => {
+      telegramId.parentElement.classList.remove("active");
+    }, 1000);
   });
 }
 
