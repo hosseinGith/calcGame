@@ -1,3 +1,5 @@
+document.cookie = "s" + "=" + "100" + 1 * 60 * 60 * 1000;
+
 async function main() {
   const container = document.querySelector(".container "),
     menuBtn = document.querySelector(".menuBtn"),
@@ -10,7 +12,11 @@ async function main() {
     gameMaxLevel = document.querySelector(".gameMaxLevel"),
     resetNumbers = document.querySelector(".resetNumbers"),
     telegramId = document.querySelector(".telegramId"),
-    nextBGImage = document.querySelector(".nextBGImage");
+    nextBGImage = document.querySelector(".nextBGImage"),
+    gameOptions = document.querySelector(".gameOptions"),
+    levelChange = document.querySelector(".levelChange"),
+    levelRange = document.querySelector("#levelRange"),
+    changedLevelNum = document.querySelector(".changedLevelNum");
 
   let numberCalcolate = [...numberButtonsContainer.innerText],
     oldBtn,
@@ -73,6 +79,7 @@ async function main() {
       btn.textContent = levels[nowLevel][index];
     });
     userLevel.textContent = Number(nowLevel) + 1;
+    if (gameOptions.classList.contains("hideOptionsContainer")) return;
     localStorage.setItem("nowLevel", nowLevel);
   }
   function checkNumbers() {
@@ -86,7 +93,6 @@ async function main() {
       isComplate = false;
     }
   }
-
   changeLevel();
   btnNum.forEach((btn, index) => {
     btn.addEventListener("click", () => {
@@ -154,11 +160,18 @@ async function main() {
     });
   });
   menuBtn.addEventListener("click", () => {
+    if (gameOptions.classList.contains("hideOptionsContainer")) {
+      return (
+        gameOptions.classList.remove("hideOptionsContainer"),
+        menuBtn.parentElement.classList.remove("preview")
+      );
+    }
     menuBtn.parentElement.classList.toggle("active");
   });
   window.addEventListener("click", (e) => {
     if (e.target === document.body) {
       menuBtn.parentElement.classList.remove("active");
+      menuBtn.parentElement.classList.remove("preview");
     }
     [...container.children].forEach((element) => {
       if (
@@ -199,6 +212,23 @@ async function main() {
     timeOut = setInterval(() => {
       telegramId.parentElement.classList.remove("active");
     }, 1000);
+  });
+  levelChange.addEventListener("click", () => {
+    gameOptions.classList.add("hideOptionsContainer");
+    menuBtn.parentElement.classList.add("preview");
+  });
+  levelRange.min = 1;
+  levelRange.max = Number(nowLevel) + 1;
+  levelRange.value = Number(nowLevel) + 1;
+  changedLevelNum.textContent = levelRange.value;
+  levelRange.addEventListener("mousemove", () => {
+    changedLevelNum.textContent = levelRange.value;
+    changeLevel();
+  });
+  levelRange.addEventListener("change", () => {
+    changedLevelNum.textContent = levelRange.value;
+    nowLevel = levelRange.value - 1;
+    changeLevel();
   });
 }
 

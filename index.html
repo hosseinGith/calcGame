@@ -18,14 +18,25 @@
   <body>
     <div class="container">
       <div class="header">
-        <div class="menu active">
+        <div class="menu">
           <button class="menuBtn">
             <span class="span-1"></span>
             <span class="span-2"></span>
             <span class="span-3"></span>
           </button>
           <nav class="gameOptions">
-            <ul>
+            <ul class="userChangeLevelContainer">
+              <li>
+                <div class="changedLevelNumContainer">
+                  <span contenteditable="true" class="changedLevelNum"></span>
+                </div>
+                <div class="rangeInput">
+                  <label for="levelRange"> مرحله را انتخاب کنید </label>
+                  <input type="range" id="levelRange" />
+                </div>
+              </li>
+            </ul>
+            <ul class="optionsContainer">
               <li>
                 <p>4 = 10</p>
                 <p>ما به شما 4 عدد میدیم ,باید مساوی 10 شوند</p>

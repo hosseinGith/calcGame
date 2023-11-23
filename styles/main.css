@@ -118,6 +118,24 @@ body {
 .container .header .menu .gameOptions ul .changGameOptions button:hover {
   opacity: 0.8;
 }
+.container .header .menu .gameOptions .userChangeLevelContainer li .changedLevelNumContainer {
+  font-size: 30px;
+  direction: ltr;
+}
+.container .header .menu .gameOptions .userChangeLevelContainer li .rangeInput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .header .menu .gameOptions .userChangeLevelContainer li .rangeInput input {
+  width: 50%;
+}
+.container .header .menu .gameOptions:not(.hideOptionsContainer) .userChangeLevelContainer {
+  display: none;
+}
+.container .header .menu .gameOptions.hideOptionsContainer .optionsContainer {
+  display: none;
+}
 .container .header .menu.active .span-1 {
   position: absolute;
   top: 80%;
@@ -139,6 +157,22 @@ body {
 }
 .container .header .menu.active .gameOptions ul {
   opacity: 1;
+}
+.container .header .menu.preview .span-1 {
+  position: absolute;
+  top: 20%;
+  left: -12px;
+  transform: rotate(135deg) translate(-50%, -50%);
+}
+.container .header .menu.preview .span-2 {
+  display: inline-block;
+  transform: translate(6px, 0);
+}
+.container .header .menu.preview .span-3 {
+  position: absolute;
+  top: 3px;
+  left: -10px;
+  transform: rotate(-135deg) translate(-50%, -50%);
 }
 .container .main {
   width: 100%;

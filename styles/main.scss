@@ -124,8 +124,35 @@ body {
             }
           }
         }
+        .userChangeLevelContainer {
+          li {
+            .changedLevelNumContainer {
+              font-size: 30px;
+              direction: ltr;
+            }
+            .rangeInput {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              input {
+                width: 50%;
+              }
+            }
+          }
+        }
+      }
+      .gameOptions:not(.hideOptionsContainer) {
+        .userChangeLevelContainer {
+          display: none;
+        }
+      }
+      .gameOptions.hideOptionsContainer {
+        .optionsContainer {
+          display: none;
+        }
       }
     }
+
     .menu.active {
       .span-1 {
         position: absolute;
@@ -148,6 +175,24 @@ body {
         ul {
           opacity: 1;
         }
+      }
+    }
+    .menu.preview {
+      .span-1 {
+        position: absolute;
+        top: 20%;
+        left: -12px;
+        transform: rotate(135deg) translate(-50%, -50%);
+      }
+      .span-2 {
+        display: inline-block;
+        transform: translate(6px, 0);
+      }
+      .span-3 {
+        position: absolute;
+        top: 3px;
+        left: -10px;
+        transform: rotate(-135deg) translate(-50%, -50%);
       }
     }
   }
